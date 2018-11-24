@@ -47,6 +47,15 @@ const StackNavigator = createStackNavigator(
 );
 */
 
+const DrawerNavigator = createDrawerNavigator(
+  {
+    List: ListScreen,
+  },
+  {
+    initialRouteName: 'List'
+  }
+);
+
 const AuthNavigator = createStackNavigator(
   {
     Login: LoginScreen
@@ -57,7 +66,8 @@ const SwitchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
     // App: StackNavigator,
-    App: ListScreen,
+    // App: ListScreen,
+    App: DrawerNavigator,
     Auth: AuthNavigator
   },
   {
