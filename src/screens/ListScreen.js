@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  shape,
   func,
   bool,
   arrayOf,
@@ -24,6 +25,9 @@ class ListScreen extends Component {
   };
 
   static propTypes = {
+    navigation: shape({
+      navigate: func.isRequired
+    }).isRequired,
     getBooks: func.isRequired,
     loading: bool.isRequired,
     books: arrayOf(object).isRequired
@@ -32,6 +36,11 @@ class ListScreen extends Component {
   async componentDidMount() {
     await this.props.getBooks('a vida como');
   }
+
+  onNavigate = (route, params) => {
+    const { navigation: { navigate } } = this.props;
+    return navigate(route, params);
+  };
 
   render() {
     const { loading, books } = this.props;
@@ -54,6 +63,7 @@ class ListScreen extends Component {
           isLoading={loading}
           data={books}
           grid={3}
+          onPressGridItem={this.onNavigate}
         />
       </ViewContainer>
     );

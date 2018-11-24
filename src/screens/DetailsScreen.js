@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import {
+  shape,
+  func
+} from 'prop-types';
 import { Divider } from 'react-native-elements';
 
 import { ViewContainer, StyledMaterialIcon } from '../components/shared';
 import Header from '../components/Header';
 import BookDetails from '../modules/details/BookDetails';
-import Book from '../components/Book';
-import Text from '../components/Text';
 
 import styles, { em, isIOS } from '../styles';
-import {
-  listScreendividerStyle,
-  detailsScreenBookStyle
-} from '../styles/general';
+import { listScreendividerStyle } from '../styles/general';
 
 class DetailsScreen extends Component {
+  static propTypes = {
+    navigation: shape({
+      goBack: func.isRequired
+    }).isRequired
+  };
+
   state = {};
 
   render() {
+    const { navigation: { goBack } } = this.props;
+
     return (
       <ViewContainer
         flex={0.6}
@@ -26,7 +33,11 @@ class DetailsScreen extends Component {
         backgroundColor={styles.colors.mainColor}
       >
         <Header
-          left={<StyledMaterialIcon name="keyboard-backspace" />}
+          left={(
+            <TouchableOpacity onPress={() => goBack()}>
+              <StyledMaterialIcon name="keyboard-backspace" />
+            </TouchableOpacity>
+          )}
           title="Design Books"
           right={<StyledMaterialIcon name="search" />}
         />

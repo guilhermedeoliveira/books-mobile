@@ -4,7 +4,8 @@ import {
   bool,
   arrayOf,
   object,
-  number
+  number,
+  func
 } from 'prop-types';
 
 import { ViewContainer } from '../shared';
@@ -20,10 +21,17 @@ class Grid extends PureComponent {
   static propTypes = {
     isLoading: bool.isRequired,
     data: arrayOf(object).isRequired,
-    grid: number.isRequired
+    grid: number.isRequired,
+    onPressGridItem: func
+  };
+
+  static defaultProps = {
+    onPressGridItem: () => {}
   };
 
   _renderItem = ({ item }) => {
+    const { onPressGridItem } = this.props;
+
     if (item.empty) {
       return <GridItemContainer />;
     }
@@ -31,7 +39,7 @@ class Grid extends PureComponent {
     return (
       <Book
         item={item}
-        onPressItem={() => {}}
+        onPressItem={() => onPressGridItem('Details', item)}
         containerStyle={listScreenBookStyle}
       />
     );
