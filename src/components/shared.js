@@ -22,8 +22,10 @@ export const ScrollViewContainer = styled.ScrollView.attrs({
 export const ViewContainer = styled.View`
   flex: 1;
 
-  padding-vertical: ${({ paddingVertical }) => paddingVertical || 0};
-  padding-horizontal: ${({ paddingHorizontal }) => paddingHorizontal || 0};
+  marginVertical: ${({ marginVertical }) => marginVertical || 0};
+  marginHorizontal: ${({ marginHorizontal }) => marginHorizontal || 0};
+  paddingVertical: ${({ paddingVertical }) => paddingVertical || 0};
+  paddingHorizontal: ${({ paddingHorizontal }) => paddingHorizontal || 0};
   background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
 
   ${({ centralized }) => centralized && css`
@@ -43,8 +45,8 @@ export const TouchableCircle = styled.TouchableOpacity.attrs({
   border-radius: ${({ radius }) => radius * 2 || em(3)};
 `;
 
-export const StyledmaterialIcon = styled(materialIcon).attrs({
-  name: ({ name }) => name || 'favorite',
+export const StyledMaterialIcon = styled(materialIcon).attrs({
+  name: ({ name }) => name || 'search',
   size: ({ size }) => size || em(2),
-  color: ({ color }) => color || styles.colors.black
+  color: ({ color }) => color || styles.colors.tint
 })``;
