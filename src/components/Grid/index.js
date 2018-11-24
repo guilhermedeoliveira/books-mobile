@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { arrayOf, object, number } from 'prop-types';
 
-import { GridItemContainer } from './Grid.styles';
-import Text from '../Text';
+import Book from '../Book';
 
+import { listScreenBookStyle } from '../../styles/general';
 import { formatGridData } from '../../helpers/array';
 
 class Grid extends PureComponent {
@@ -14,9 +14,7 @@ class Grid extends PureComponent {
   };
 
   _renderItem = ({ item }) => (
-    <GridItemContainer>
-      <Text>{item.name}</Text>
-    </GridItemContainer>
+    <Book item={item} containerStyle={listScreenBookStyle} />
   );
 
   render() {

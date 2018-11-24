@@ -24,12 +24,14 @@ export default {
     mainColor: '#FFDD0D',
     yellowBorder: '#F0D10F',
     tint: '#2C2605',
+    textLight: '#9F8B0C',
     black: '#000000',
     blackShadow: 'rgba(0, 0, 0, 0.1)',
     white: '#ffffff',
     whiteHalf: 'rgba(255, 255, 255, 0.5)',
     red: '#ff0000',
-    gray: '#808080'
+    gray: '#808080',
+    transparent: 'rgba(0, 0, 0, 0)'
   },
   border: {
     default: 2,

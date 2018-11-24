@@ -20,7 +20,7 @@ export const ScrollViewContainer = styled.ScrollView.attrs({
 `;
 
 export const ViewContainer = styled.View`
-  flex: 1;
+  flex: ${({ flex }) => flex || 1};
 
   marginVertical: ${({ marginVertical }) => marginVertical || 0};
   marginHorizontal: ${({ marginHorizontal }) => marginHorizontal || 0};
