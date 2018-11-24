@@ -23,7 +23,12 @@ class DetailsScreen extends Component {
   state = {};
 
   render() {
-    const { navigation: { goBack } } = this.props;
+    const {
+      navigation: {
+        goBack,
+        state: { params }
+      }
+    } = this.props;
 
     return (
       <ViewContainer
@@ -44,7 +49,7 @@ class DetailsScreen extends Component {
 
         <Divider style={listScreendividerStyle} />
 
-        <BookDetails />
+        <BookDetails item={params} />
       </ViewContainer>
     );
   }

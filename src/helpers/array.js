@@ -9,3 +9,5 @@ export const formatGridData = (data, numColumns) => {
 
   return data;
 };
+
+export const normalizeAuthorsArray = authors => authors.join(', ');

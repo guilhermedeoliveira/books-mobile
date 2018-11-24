@@ -31,6 +31,7 @@ export default {
     whiteHalf: 'rgba(255, 255, 255, 0.5)',
     red: '#ff0000',
     gray: '#808080',
+    blueButton: '#4A90E2',
     transparent: 'rgba(0, 0, 0, 0)'
   },
   border: {

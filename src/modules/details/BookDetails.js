@@ -1,5 +1,11 @@
 import React from 'react';
-import { Rating, Button } from 'react-native-elements';
+import {
+  shape,
+  string,
+  arrayOf,
+  number
+} from 'prop-types';
+import { Rating } from 'react-native-elements';
 
 import {
   BookDetailsWrapper,
@@ -12,46 +18,82 @@ import {
 } from './BookDetails.styles';
 import Book from '../../components/Book';
 import Text from '../../components/Text';
+import Button from '../../components/Button';
 
 import styles, { em } from '../../styles';
-import { detailsScreenBuyButtonStyle } from '../../styles/general';
+import { normalizeAuthorsArray } from '../../helpers/array';
 
-const BookDetails = () => (
-  <BookDetailsWrapper>
-    <BookDetailsContainer>
-      <BookDetailsLeftSection>
-        <Book item={{ name: 'det' }} />
-        <Text light color={styles.colors.textLight}>216 pages</Text>
-      </BookDetailsLeftSection>
+const BookDetails = ({ item }) => {
+  const {
+    volumeInfo: {
+      title,
+      pageCount,
+      authors
+    },
+    saleInfo: {
+      retailPrice: {
+        amount
+      }
+    }
+  } = item;
 
-      <BookDetailsRightSection>
-        <BookDetailsRightTopSection>
-          <Text large>aksdfssasdh lfkhsdaf lakhf</Text>
-          <Text light color={styles.colors.textLight}>by David Airey</Text>
+  return (
+    <BookDetailsWrapper>
+      <BookDetailsContainer>
+        <BookDetailsLeftSection>
+          <Book item={item} />
+          {pageCount && (
+            <Text light color={styles.colors.textLight}>{pageCount} pages</Text>
+          )}
+        </BookDetailsLeftSection>
 
-          <BookDetailsRightPricingSection>
-            <Text large>R$ 9.99</Text>
-            <Rating
-              readonly
-              imageSize={20}
-              fractions={1}
-              startingValue={0}
-              ratingColor={styles.colors.black}
-              ratingBackgroundColor="red"
-              style={{ marginLeft: em(1) }}
-            />
-          </BookDetailsRightPricingSection>
-        </BookDetailsRightTopSection>
+        <BookDetailsRightSection>
+          <BookDetailsRightTopSection>
+            <Text large>{title || 'No title provided'}</Text>
+            <Text light color={styles.colors.textLight}>
+              by {normalizeAuthorsArray(authors)}
+            </Text>
 
-        <BookDetailsRightBottomSection>
-          <Button title="BUY" buttonStyle={detailsScreenBuyButtonStyle} />
-          <Text>das</Text>
-        </BookDetailsRightBottomSection>
-      </BookDetailsRightSection>
-    </BookDetailsContainer>
+            <BookDetailsRightPricingSection>
+              <Text large>R$ {amount}</Text>
+              <Rating
+                readonly
+                imageSize={20}
+                fractions={1}
+                startingValue={0}
+                ratingColor={styles.colors.black}
+                ratingBackgroundColor="red"
+                style={{ marginLeft: em(1) }}
+              />
+            </BookDetailsRightPricingSection>
+          </BookDetailsRightTopSection>
 
+          <BookDetailsRightBottomSection>
+            <Button>
+              <Text color={styles.colors.white}>BUY</Text>
+            </Button>
 
-  </BookDetailsWrapper>
-);
+            <Text>das</Text>
+          </BookDetailsRightBottomSection>
+        </BookDetailsRightSection>
+      </BookDetailsContainer>
+    </BookDetailsWrapper>
+  );
+};
+
+BookDetails.propTypes = {
+  item: shape({
+    volumeInfo: shape({
+      title: string.isRequired,
+      pageCount: number.isRequired,
+      authors: arrayOf(string).isRequired
+    }).isRequired,
+    saleInfo: shape({
+      retailPrice: shape({
+        amount: number.isRequired
+      }).isRequired
+    }).isRequired
+  }).isRequired
+};
 
 export default BookDetails;
