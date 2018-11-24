@@ -19,3 +19,8 @@ export const detailsScreenBuyButtonStyle = {
   width: em(6),
   borderRadius: 15
 };
+
+export const borderedStyle = {
+  borderWidth: styles.border.default,
+  bordercolor: styles.colors.tint
+};

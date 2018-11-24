@@ -11,6 +11,7 @@ import { ViewContainer } from '../shared';
 import Loader from '../Loader';
 import Text from '../Text';
 import Book from '../Book';
+import { GridItemContainer } from '../Book/Book.styles';
 
 import { listScreenBookStyle } from '../../styles/general';
 import { formatGridData } from '../../helpers/array';
@@ -22,9 +23,19 @@ class Grid extends PureComponent {
     grid: number.isRequired
   };
 
-  _renderItem = ({ item }) => (
-    <Book item={item} containerStyle={listScreenBookStyle} />
-  );
+  _renderItem = ({ item }) => {
+    if (item.empty) {
+      return <GridItemContainer />;
+    }
+
+    return (
+      <Book
+        item={item}
+        onPressItem={() => {}}
+        containerStyle={listScreenBookStyle}
+      />
+    );
+  };
 
   render() {
     const { isLoading, data, grid } = this.props;

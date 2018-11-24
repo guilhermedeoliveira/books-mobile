@@ -34,6 +34,15 @@ export const ViewContainer = styled.View`
   `};
 `;
 
+export const CoverImageBackground = styled.ImageBackground.attrs({
+  source: ({ coverImage }) => ({ uri: coverImage }),
+  resizeMode: ({ resizeMode }) => resizeMode || 'cover'
+})`
+  flex: 1;
+  width: 100%;
+  height: 100%;
+`;
+
 export const TouchableCircle = styled.TouchableOpacity.attrs({
   activeOpacity: ({ activeOpacity }) => activeOpacity || 0.9
 })`
