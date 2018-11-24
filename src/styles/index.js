@@ -21,14 +21,18 @@ export const isIOS = Platform.OS === 'ios';
 // Colors, font, sizes
 export default {
   colors: {
+    mainColor: '#FFDD0D',
+    yellowBorder: '#F0D10F',
+    tint: '#2C2605',
     black: '#000000',
     blackShadow: 'rgba(0, 0, 0, 0.1)',
     white: '#ffffff',
     whiteHalf: 'rgba(255, 255, 255, 0.5)',
     red: '#ff0000',
-    gray: '#808080',
+    gray: '#808080'
   },
-  button: {
+  border: {
+    default: 2,
     borderRadius: 25
   },
   fontSize: {
