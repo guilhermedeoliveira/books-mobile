@@ -4,8 +4,8 @@ const fetchBooks = async (query) => {
       `https://www.googleapis.com/books/v1/volumes?q=${query}`
     );
 
-    const responseJson = await response.json();
-    return responseJson;
+    const { items } = await response.json();
+    return items;
   } catch (error) {
     return console.error(error);
   }

@@ -15,7 +15,7 @@ Loader.propTypes = {
 
 Loader.defaultProps = {
   size: 'large',
-  color: styles.colors.white
+  color: styles.colors.tint
 };
 
 export default Loader;

@@ -2,10 +2,9 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { Types } from './books';
 import Api from '../api';
 
-export function* getBooks() {
+export function* getBooks(query) {
   try {
-    const response = yield call(Api.fetchBooks, 'a vida como');
-    // const response = yield call(Api.fetchBooks, 'a vida como');
+    const response = yield call(Api.fetchBooks, query);
 
     yield put({ type: Types.GET_BOOKS_SUCCESS, payload: response });
   } catch (err) {

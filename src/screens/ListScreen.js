@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import {
+  func,
+  bool,
+  arrayOf,
+  object
+} from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Divider } from 'react-native-elements';
@@ -7,9 +13,7 @@ import { ViewContainer, StyledMaterialIcon } from '../components/shared';
 import Header from '../components/Header';
 import Grid from '../components/Grid';
 
-// import { getBooks } from '../store/books';
-// import { getBooks } from '../store/sagas';
-import Api from '../api';
+import { getBooks } from '../store/books';
 
 import styles, { em, isIOS } from '../styles';
 import { listScreendividerStyle } from '../styles/general';
@@ -19,29 +23,18 @@ class ListScreen extends Component {
     drawerLabel: 'List'
   };
 
-  state = {
-    books: [
-      { id: 'dasd', name: 'opa' },
-      { id: 'dasdd', name: 'opa' },
-      { id: 'dad', name: 'opa' },
-      { id: 'dsd', name: 'opa' },
-      { id: 'dsdasd', name: 'opa' },
-      { id: 'dadasd', name: 'opa' },
-      { id: 'daadd', name: 'opa' },
-      { id: 'dafgsd', name: 'opa' },
-      { id: 'dashgd', name: 'opa' },
-      { id: 'aaadashgd', name: 'opa' }
-    ]
+  static propTypes = {
+    getBooks: func.isRequired,
+    loading: bool.isRequired,
+    books: arrayOf(object).isRequired
   };
 
   async componentDidMount() {
-    // await this.props.getBooks();
-    const opa = await Api.fetchBooks();
-    console.log('opa', opa);
+    await this.props.getBooks('a vida como');
   }
 
   render() {
-    console.log('PROPS', this.props);
+    const { loading, books } = this.props;
 
     return (
       <ViewContainer
@@ -58,7 +51,8 @@ class ListScreen extends Component {
         <Divider style={listScreendividerStyle} />
 
         <Grid
-          data={this.state.books}
+          isLoading={loading}
+          data={books}
           grid={3}
         />
       </ViewContainer>
@@ -72,5 +66,5 @@ export default connect(
     books: store.books.data,
     error: store.books.error
   }),
-  // dispatch => bindActionCreators({ getBooks }, dispatch)
+  dispatch => bindActionCreators({ getBooks }, dispatch)
 )(ListScreen);
