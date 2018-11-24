@@ -1,4 +1,3 @@
-
 const fetchBooks = async (query) => {
   try {
     const response = await fetch(

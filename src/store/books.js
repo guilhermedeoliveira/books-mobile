@@ -48,5 +48,5 @@ export default (state = initialState, action) => {
  * action creators
  */
 export const getBooks = () => ({
-  type: Types.getBooks
+  type: Types.GET_BOOKS
 });
