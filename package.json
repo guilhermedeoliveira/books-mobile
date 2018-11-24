@@ -15,11 +15,14 @@
     "android-build:prod": "cd android && ENVFILE=.env.production ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
+    "prop-types": "^15.6.2",
     "react": "16.6.1",
     "react-native": "0.57.5",
     "react-native-elements": "^1.0.0-beta7",
+    "react-native-gesture-handler": "^1.0.9",
     "react-native-vector-icons": "^6.1.0",
-    "react-navigation": "^3.0.0"
+    "react-navigation": "2.9.2",
+    "styled-components": "^4.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

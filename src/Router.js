@@ -4,14 +4,15 @@ import {
   createDrawerNavigator
 } from 'react-navigation';
 
-import AuthLoadingScreen from './screens/auth/AuthLoadingScreen';
-import LoginScreen from './screens/auth/LoginScreen';
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
+import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import ListScreen from './screens/ListScreen';
 import DetailsScreen from './screens/DetailsScreen';
 
 import styles from './styles';
 
+/*
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: HomeScreen,
@@ -44,21 +45,24 @@ const StackNavigator = createStackNavigator(
     initialRouteName: 'BottomTabNavigator'
   }
 );
+*/
 
 const AuthNavigator = createStackNavigator(
   {
-    LogIn: LoginScreen
+    Login: LoginScreen
   }
 );
 
 const SwitchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    App: StackNavigator,
+    // App: StackNavigator,
+    App: ListScreen,
     Auth: AuthNavigator
   },
   {
-    initialRouteName: 'AuthLoading'
+    // initialRouteName: 'AuthLoading'
+    initialRouteName: 'App'
   }
 );
 
