@@ -17,7 +17,7 @@ export const BookDetailsLeftSection = styled.View`
   justify-content: space-between;
   align-items: center;
 
-  padding-bottom: ${em(3)};
+  padding-bottom: ${em(2.2)};
 `;
 
 export const BookDetailsRightSection = styled.View`

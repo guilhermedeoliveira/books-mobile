@@ -20,6 +20,11 @@ export const detailsScreenBuyButtonStyle = {
   borderRadius: 15
 };
 
+export const detailsScreenScrollViewStyle = {
+  paddingVertical: em(2),
+  paddingHorizontal: em(1.5)
+};
+
 export const borderedStyle = {
   borderWidth: styles.border.default,
   bordercolor: styles.colors.tint

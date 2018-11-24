@@ -6,12 +6,17 @@ import {
 } from 'prop-types';
 import { Divider } from 'react-native-elements';
 
-import { ViewContainer, StyledMaterialIcon } from '../components/shared';
+import {
+  ViewContainer,
+  StyledMaterialIcon,
+  ScrollViewContainer
+} from '../components/shared';
 import Header from '../components/Header';
 import BookDetails from '../modules/details/BookDetails';
+import Text from '../components/Text';
 
 import styles, { em, isIOS } from '../styles';
-import { listScreendividerStyle } from '../styles/general';
+import { listScreendividerStyle, detailsScreenScrollViewStyle } from '../styles/general';
 
 class DetailsScreen extends Component {
   static propTypes = {
@@ -31,26 +36,37 @@ class DetailsScreen extends Component {
     } = this.props;
 
     return (
-      <ViewContainer
-        flex={0.6}
-        paddingVertical={isIOS ? em(3.5) : em(1.5)}
-        paddingHorizontal={em(0.3)}
-        backgroundColor={styles.colors.mainColor}
-      >
-        <Header
-          left={(
-            <TouchableOpacity onPress={() => goBack()}>
-              <StyledMaterialIcon name="keyboard-backspace" />
-            </TouchableOpacity>
-          )}
-          title="Design Books"
-          right={<StyledMaterialIcon name="search" />}
-        />
+      <>
+        <ViewContainer
+          flex={1}
+          paddingVertical={isIOS ? em(3.5) : em(1.5)}
+          paddingHorizontal={em(0.3)}
+          backgroundColor={styles.colors.mainColor}
+        >
+          <Header
+            left={(
+              <TouchableOpacity onPress={() => goBack()}>
+                <StyledMaterialIcon name="keyboard-backspace" />
+              </TouchableOpacity>
+            )}
+            title="Design Books"
+            right={<StyledMaterialIcon name="search" />}
+          />
 
-        <Divider style={listScreendividerStyle} />
+          <Divider style={listScreendividerStyle} />
 
-        <BookDetails item={params} />
-      </ViewContainer>
+          <BookDetails item={params} />
+        </ViewContainer>
+
+        <ScrollViewContainer
+          style={{ flex: 1 }}
+          contentContainerStyle={detailsScreenScrollViewStyle}
+        >
+          <Text style={{ lineHeight: em(2.15) }}>
+            {params.volumeInfo.description}
+          </Text>
+        </ScrollViewContainer>
+      </>
     );
   }
 }
