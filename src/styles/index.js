@@ -30,6 +30,7 @@ export default {
     white: '#ffffff',
     whiteHalf: 'rgba(255, 255, 255, 0.5)',
     red: '#ff0000',
+    redHeart: '#DC4B5D',
     gray: '#808080',
     blueButton: '#4A90E2',
     transparent: 'rgba(0, 0, 0, 0)'

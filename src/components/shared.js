@@ -48,10 +48,10 @@ export const TouchableCircle = styled.TouchableOpacity.attrs({
 })`
   justify-content: center;
   align-items: center;
-  background-color: ${({ backgroundColor }) => backgroundColor || styles.colors.white};
+  background-color: ${({ backgroundColor }) => backgroundColor || styles.colors.redHeart};
   width: ${({ radius }) => radius * 2 || em(6)};
   height: ${({ radius }) => radius * 2 || em(6)};
-  border-radius: ${({ radius }) => radius * 2 || em(3)};
+  border-radius: ${({ radius }) => radius || em(3)};
 `;
 
 export const StyledMaterialIcon = styled(materialIcon).attrs({

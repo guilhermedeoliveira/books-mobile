@@ -7,6 +7,7 @@ import {
 } from 'prop-types';
 import { Rating } from 'react-native-elements';
 
+import { TouchableCircle, StyledMaterialIcon } from '../../components/shared';
 import {
   BookDetailsWrapper,
   BookDetailsContainer,
@@ -42,20 +43,24 @@ const BookDetails = ({ item }) => {
       <BookDetailsContainer>
         <BookDetailsLeftSection>
           <Book item={item} />
+
           {pageCount && (
-            <Text light color={styles.colors.textLight}>{pageCount} pages</Text>
+            <Text light color={styles.colors.textLight}>
+              {pageCount} pages
+            </Text>
           )}
         </BookDetailsLeftSection>
 
         <BookDetailsRightSection>
           <BookDetailsRightTopSection>
-            <Text large>{title || 'No title provided'}</Text>
+            <Text large bold>{title || 'No title provided'}</Text>
+
             <Text light color={styles.colors.textLight}>
               by {normalizeAuthorsArray(authors)}
             </Text>
 
             <BookDetailsRightPricingSection>
-              <Text large>R$ {amount}</Text>
+              <Text large bold>R$ {amount}</Text>
               <Rating
                 readonly
                 imageSize={20}
@@ -70,10 +75,19 @@ const BookDetails = ({ item }) => {
 
           <BookDetailsRightBottomSection>
             <Button>
-              <Text color={styles.colors.white}>BUY</Text>
+              <Text bold color={styles.colors.white}>BUY</Text>
             </Button>
 
-            <Text>das</Text>
+            <TouchableCircle
+              radius={em(1.2)}
+              style={{ marginLeft: em(0.5) }}
+            >
+              <StyledMaterialIcon
+                name="favorite-border"
+                color={styles.colors.white}
+                size={em(1.5)}
+              />
+            </TouchableCircle>
           </BookDetailsRightBottomSection>
         </BookDetailsRightSection>
       </BookDetailsContainer>
