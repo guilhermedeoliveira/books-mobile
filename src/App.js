@@ -6,8 +6,10 @@
 
 import React, { PureComponent } from 'react';
 import { BackHandler } from 'react-native';
+import { Provider } from 'react-redux';
 
 import Router from './Router';
+import store from './store';
 import { SafeContainer } from './components/shared';
 
 class App extends PureComponent {
@@ -21,9 +23,11 @@ class App extends PureComponent {
 
   render() {
     return (
-      <SafeContainer>
-        <Router />
-      </SafeContainer>
+      <Provider store={store}>
+        <SafeContainer>
+          <Router />
+        </SafeContainer>
+      </Provider>
     );
   }
 }

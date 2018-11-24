@@ -75,6 +75,8 @@ const SwitchNavigator = createSwitchNavigator(
   {
     // AuthLoading: AuthLoadingScreen,
     Details: DetailsScreen,
+    List: ListScreen,
+
     // App: StackNavigator,
     // App: ListScreen,
     App: MainStackNavigator,
@@ -82,7 +84,7 @@ const SwitchNavigator = createSwitchNavigator(
   },
   {
     // initialRouteName: 'AuthLoading'
-    initialRouteName: 'Details'
+    initialRouteName: 'List'
   }
 );
 

@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Divider } from 'react-native-elements';
 
 import { ViewContainer, StyledMaterialIcon } from '../components/shared';
 import Header from '../components/Header';
 import Grid from '../components/Grid';
+
+// import { getBooks } from '../store/books';
+// import { getBooks } from '../store/sagas';
+import Api from '../api';
 
 import styles, { em, isIOS } from '../styles';
 import { listScreendividerStyle } from '../styles/general';
@@ -28,7 +34,15 @@ class ListScreen extends Component {
     ]
   };
 
+  async componentDidMount() {
+    // await this.props.getBooks();
+    const opa = await Api.fetchBooks();
+    console.log('opa', opa);
+  }
+
   render() {
+    console.log('PROPS', this.props);
+
     return (
       <ViewContainer
         paddingVertical={isIOS ? em(3.5) : em(1.5)}
@@ -52,4 +66,11 @@ class ListScreen extends Component {
   }
 }
 
-export default ListScreen;
+export default connect(
+  store => ({
+    loading: store.books.loading,
+    books: store.books.data,
+    error: store.books.error
+  }),
+  // dispatch => bindActionCreators({ getBooks }, dispatch)
+)(ListScreen);
