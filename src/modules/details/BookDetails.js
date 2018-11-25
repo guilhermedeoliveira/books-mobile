@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   shape,
+  object,
   string,
   arrayOf,
   bool,
@@ -40,11 +41,7 @@ const BookDetails = ({
       pageCount,
       authors
     },
-    saleInfo: {
-      retailPrice: {
-        amount
-      }
-    }
+    saleInfo
   } = item;
 
   return (
@@ -73,7 +70,9 @@ const BookDetails = ({
             </Text>
 
             <BookDetailsRightPricingSection>
-              <Text large bold>R$ {amount}</Text>
+              <Text large bold>
+                {(saleInfo.retailPrice && `R$ ${saleInfo.retailPrice.amount}`) || 'not for sale'}
+              </Text>
 
               <StarRating
                 maxStars={5}
@@ -116,11 +115,7 @@ BookDetails.propTypes = {
       pageCount: number.isRequired,
       authors: arrayOf(string).isRequired
     }).isRequired,
-    saleInfo: shape({
-      retailPrice: shape({
-        amount: number.isRequired
-      }).isRequired
-    }).isRequired
+    saleInfo: object.isRequired
   }).isRequired,
   starRating: number.isRequired,
   isBookFavorite: bool.isRequired,
