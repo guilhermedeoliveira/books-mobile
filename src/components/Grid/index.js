@@ -20,7 +20,9 @@ import { formatGridData } from '../../helpers/array';
 class Grid extends PureComponent {
   static propTypes = {
     isLoading: bool.isRequired,
+    isFetchingWithButton: bool.isRequired,
     data: arrayOf(object).isRequired,
+    onRefresh: func.isRequired,
     grid: number.isRequired,
     onPressGridItem: func
   };
@@ -46,9 +48,15 @@ class Grid extends PureComponent {
   };
 
   render() {
-    const { isLoading, data, grid } = this.props;
+    const {
+      isLoading,
+      isFetchingWithButton,
+      data,
+      onRefresh,
+      grid
+    } = this.props;
 
-    if (isLoading) {
+    if (isFetchingWithButton && !data.length) {
       return (
         <ViewContainer centralized>
           <Loader />
@@ -59,7 +67,7 @@ class Grid extends PureComponent {
     if (data.length < 1) {
       return (
         <ViewContainer centralized>
-          <Text large>No books!</Text>
+          <Text large>Search for books!</Text>
         </ViewContainer>
       );
     }
@@ -68,6 +76,8 @@ class Grid extends PureComponent {
       <FlatList
         data={formatGridData(data, grid)}
         keyExtractor={item => item.id}
+        onRefresh={onRefresh}
+        refreshing={isLoading}
         numColumns={grid}
         renderItem={this._renderItem}
       />

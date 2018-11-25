@@ -35,7 +35,10 @@ class ListScreen extends PureComponent {
     books: arrayOf(object).isRequired
   };
 
-  state = { isShowingSearchInput: false };
+  state = {
+    isShowingSearchInput: false,
+    isFetchingWithButton: false
+  };
 
   onNavigate = (route, params) => {
     const { navigation: { navigate } } = this.props;
@@ -44,7 +47,10 @@ class ListScreen extends PureComponent {
 
   onPressSearchButton = async () => {
     await this._fetchBooks();
-    this.setState({ isShowingSearchInput: false });
+    return this.setState({
+      isShowingSearchInput: false,
+      isFetchingWithButton: true
+    });
   };
 
   onChangeInput = (value, name) => this.setState({ [name]: value })
@@ -55,7 +61,7 @@ class ListScreen extends PureComponent {
 
   render() {
     const { loading, books } = this.props;
-    const { isShowingSearchInput, search } = this.state;
+    const { isShowingSearchInput, isFetchingWithButton, search } = this.state;
 
     return (
       <ViewContainer
@@ -89,6 +95,7 @@ class ListScreen extends PureComponent {
 
         <Grid
           isLoading={loading}
+          isFetchingWithButton={isFetchingWithButton}
           data={books}
           onRefresh={this._fetchBooks}
           grid={3}

@@ -16,6 +16,7 @@ const Header = ({ left, title, right }) => (
 );
 
 const HeaderWrapper = styled.View`
+  margin-bottom: ${em(1.5)};
   paddingHorizontal: ${em(0.3)};
 `;
 

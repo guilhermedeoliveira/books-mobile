@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/native';
 import { em } from '../../styles';
 
 export const GridItemTouchableContainer = styled.TouchableOpacity.attrs({
-  activityOpacity: 0.9
+  activeOpacity: 1
 })`
   height: ${em(9)};
   width: ${em(7)};
