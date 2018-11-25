@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  func,
   shape,
   string,
   arrayOf,
@@ -26,6 +27,7 @@ import { normalizeAuthorsArray } from '../../helpers/array';
 
 const BookDetails = ({ item }) => {
   const {
+    onPressBuyButton,
     volumeInfo: {
       title,
       pageCount,
@@ -45,7 +47,11 @@ const BookDetails = ({ item }) => {
           <Book item={item} />
 
           {pageCount && (
-            <Text light color={styles.colors.textLight}>
+            <Text
+              light
+              color={styles.colors.textLight}
+              style={{ marginLeft: em(0.8) }}
+            >
               {pageCount} pages
             </Text>
           )}
@@ -74,7 +80,7 @@ const BookDetails = ({ item }) => {
           </BookDetailsRightTopSection>
 
           <BookDetailsRightBottomSection>
-            <Button>
+            <Button onPress={onPressBuyButton}>
               <Text bold color={styles.colors.white}>BUY</Text>
             </Button>
 
@@ -97,6 +103,7 @@ const BookDetails = ({ item }) => {
 
 BookDetails.propTypes = {
   item: shape({
+    onPressBuyButton: func.isRequired,
     volumeInfo: shape({
       title: string.isRequired,
       pageCount: number.isRequired,

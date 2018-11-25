@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { shape, func } from 'prop-types';
 
 import { ViewContainer } from '../components/shared';
@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import styles from '../styles';
 import { getUserToken } from '../helpers/login';
 
-class AuthLoadingScreen extends Component {
+class AuthLoadingScreen extends PureComponent {
   static propTypes = {
     navigation: shape({
       navigate: func.isRequired

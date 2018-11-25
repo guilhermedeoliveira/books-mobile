@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
 import {
   shape,
@@ -18,7 +18,7 @@ import Text from '../components/Text';
 import styles, { em, isIOS } from '../styles';
 import { listScreendividerStyle, detailsScreenScrollViewStyle } from '../styles/general';
 
-class DetailsScreen extends Component {
+class DetailsScreen extends PureComponent {
   static propTypes = {
     navigation: shape({
       goBack: func.isRequired
