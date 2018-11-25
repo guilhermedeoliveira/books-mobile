@@ -1,73 +1,26 @@
-import {
-  createSwitchNavigator,
-  createStackNavigator,
-  createDrawerNavigator
-} from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
-import AuthLoadingScreen from './screens/AuthLoadingScreen';
-import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import ListScreen from './screens/ListScreen';
 import DetailsScreen from './screens/DetailsScreen';
 
-import styles from './styles';
-
-/*
-const DrawerNavigator = createDrawerNavigator(
-  {
-    Home: HomeScreen,
-    Favorite: FavoriteScreen,
-    Search: SearchScreen
-  },
-  {
-    tabBarOptions: {
-      activeTintColor: styles.colors.white,
-      inactiveTintColor: styles.colors.gray,
-      style: {
-        backgroundColor: styles.colors.blueBackgroundTabBar
-      }
-    }
-  }
-);
-
-DrawerNavigator.navigationOptions = {
-  header: null
-};
+import WelcomeScreen from './screens/WelcomeScreen';
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
 
 const StackNavigator = createStackNavigator(
   {
-    BottomTabNavigator,
-    Player: PlayerScreen,
-    TitleDetails: TitleDetailsScreen,
-    Playlist: PlaylistScreen
-  },
-  {
-    initialRouteName: 'BottomTabNavigator'
-  }
-);
-*/
-
-const DrawerNavigator = createDrawerNavigator(
-  {
+    Home: HomeScreen,
     List: ListScreen,
-  },
-  {
-    initialRouteName: 'List'
-  }
-);
-
-const MainStackNavigator = createStackNavigator(
-  {
     Details: DetailsScreen
   },
   {
-    initialRouteName: 'Details'
+    initialRouteName: 'Home'
   }
 );
 
 const AuthNavigator = createStackNavigator(
   {
-    Login: LoginScreen
+    Welcome: WelcomeScreen
   }
 );
 
@@ -77,14 +30,12 @@ const SwitchNavigator = createSwitchNavigator(
     Details: DetailsScreen,
     List: ListScreen,
 
-    // App: StackNavigator,
-    // App: ListScreen,
-    App: MainStackNavigator,
+    App: StackNavigator,
     Auth: AuthNavigator
   },
   {
     // initialRouteName: 'AuthLoading'
-    initialRouteName: 'List'
+    initialRouteName: 'App'
   }
 );
 

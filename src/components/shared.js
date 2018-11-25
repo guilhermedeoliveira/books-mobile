@@ -26,6 +26,10 @@ export const ViewContainer = styled.View`
   marginHorizontal: ${({ marginHorizontal }) => marginHorizontal || 0};
   paddingVertical: ${({ paddingVertical }) => paddingVertical || 0};
   paddingHorizontal: ${({ paddingHorizontal }) => paddingHorizontal || 0};
+  
+  paddingTop: ${({ paddingTop }) => paddingTop || 0};
+  paddingBottom: ${({ paddingBottom }) => paddingBottom || 0};
+
   background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
 
   ${({ centralized }) => centralized && css`

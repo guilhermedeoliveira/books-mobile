@@ -8,10 +8,10 @@ export default styled.TouchableOpacity.attrs({
   justify-content: center;
   align-items: center;
 
-  height: ${em(2.5)};
-  width: ${em(8)};
+  height: ${({ height }) => height || em(2.5)};
+  width: ${({ width }) => width || em(8)};
   background-color: ${({ disabled }) => disabled ? styles.colors.gray : styles.colors.blueButton};
-  border-radius: 15;
+  border-radius: ${({ borderRadius }) => borderRadius || 15};
 
   ${({ error }) => error && css`
     border-color: ${styles.colors.red};
