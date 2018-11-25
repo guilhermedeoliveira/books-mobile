@@ -6,7 +6,7 @@ import {
   arrayOf,
   number
 } from 'prop-types';
-import { Rating } from 'react-native-elements';
+import StarRating from 'react-native-star-rating';
 
 import { TouchableCircle, StyledMaterialIcon } from '../../components/shared';
 import {
@@ -25,9 +25,13 @@ import Button from '../../components/Button';
 import styles, { em } from '../../styles';
 import { normalizeAuthorsArray } from '../../helpers/array';
 
-const BookDetails = ({ item }) => {
+const BookDetails = ({
+  item,
+  onPressBuyButton,
+  starRating,
+  onPressStarRating
+}) => {
   const {
-    onPressBuyButton,
     volumeInfo: {
       title,
       pageCount,
@@ -67,14 +71,13 @@ const BookDetails = ({ item }) => {
 
             <BookDetailsRightPricingSection>
               <Text large bold>R$ {amount}</Text>
-              <Rating
-                readonly
-                imageSize={20}
-                fractions={1}
-                startingValue={0}
-                ratingColor={styles.colors.black}
-                ratingBackgroundColor="red"
-                style={{ marginLeft: em(1) }}
+
+              <StarRating
+                maxStars={5}
+                rating={starRating}
+                selectedStar={rating => onPressStarRating(rating)}
+                starSize={em(1.5)}
+                containerStyle={{ marginLeft: em(1) }}
               />
             </BookDetailsRightPricingSection>
           </BookDetailsRightTopSection>
@@ -103,7 +106,6 @@ const BookDetails = ({ item }) => {
 
 BookDetails.propTypes = {
   item: shape({
-    onPressBuyButton: func.isRequired,
     volumeInfo: shape({
       title: string.isRequired,
       pageCount: number.isRequired,
@@ -114,7 +116,10 @@ BookDetails.propTypes = {
         amount: number.isRequired
       }).isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  onPressBuyButton: func.isRequired,
+  starRating: number.isRequired,
+  onPressStarRating: func.isRequired
 };
 
 export default BookDetails;

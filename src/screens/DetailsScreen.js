@@ -11,21 +11,30 @@ import {
   StyledMaterialIcon,
   ScrollViewContainer
 } from '../components/shared';
+import Modal from '../components/Modal';
 import Header from '../components/Header';
 import BookDetails from '../modules/details/BookDetails';
 import Text from '../components/Text';
 
-import styles, { em, isIOS } from '../styles';
+import styles, { em } from '../styles';
 import { listScreendividerStyle, detailsScreenScrollViewStyle } from '../styles/general';
 
 class DetailsScreen extends PureComponent {
+  static navigationOptions = {
+    header: null
+  };
+
   static propTypes = {
     navigation: shape({
       goBack: func.isRequired
     }).isRequired
   };
 
-  state = {};
+  state = { isShowingModal: false, rating: 3 };
+
+  onPressStarRating = rating => this.setState({ rating });
+
+  _showModal = () => this.setState({ isShowingModal: true });
 
   render() {
     const {
@@ -35,12 +44,13 @@ class DetailsScreen extends PureComponent {
       }
     } = this.props;
 
+    const { rating } = this.state;
+
     return (
       <>
         <ViewContainer
           flex={1}
-          paddingVertical={isIOS ? em(3.5) : em(1.5)}
-          paddingHorizontal={em(0.3)}
+          paddingTop={em(1)}
           backgroundColor={styles.colors.mainColor}
         >
           <Header
@@ -55,7 +65,12 @@ class DetailsScreen extends PureComponent {
 
           <Divider style={listScreendividerStyle} />
 
-          <BookDetails item={params} />
+          <BookDetails
+            item={params}
+            onPressBuyButton={this._showModal}
+            starRating={rating}
+            onPressStarRating={this.onPressStarRating}
+          />
         </ViewContainer>
 
         <ScrollViewContainer
