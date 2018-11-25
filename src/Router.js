@@ -1,11 +1,11 @@
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import HomeScreen from './screens/HomeScreen';
 import ListScreen from './screens/ListScreen';
 import DetailsScreen from './screens/DetailsScreen';
 
-import WelcomeScreen from './screens/WelcomeScreen';
-import AuthLoadingScreen from './screens/AuthLoadingScreen';
+// import WelcomeScreen from './screens/WelcomeScreen';
+// import AuthLoadingScreen from './screens/AuthLoadingScreen';
 
 const StackNavigator = createStackNavigator(
   {
@@ -18,12 +18,7 @@ const StackNavigator = createStackNavigator(
   }
 );
 
-const AuthNavigator = createStackNavigator(
-  {
-    Welcome: WelcomeScreen
-  }
-);
-
+/*
 const SwitchNavigator = createSwitchNavigator(
   {
     // AuthLoading: AuthLoadingScreen,
@@ -38,5 +33,6 @@ const SwitchNavigator = createSwitchNavigator(
     initialRouteName: 'App'
   }
 );
+*/
 
-export default SwitchNavigator;
+export default StackNavigator;

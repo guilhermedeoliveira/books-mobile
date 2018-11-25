@@ -37,6 +37,7 @@ export default {
   },
   border: {
     default: 2,
+    modal: 15,
     borderRadius: 25
   },
   fontSize: {

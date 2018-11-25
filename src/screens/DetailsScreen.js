@@ -15,6 +15,7 @@ import Header from '../components/Header';
 import BookDetails from '../modules/details/BookDetails';
 import Text from '../components/Text';
 import Modal from '../components/Modal';
+import DetailsModalContent from '../components/Modal/DetailsModalContent';
 
 import styles, { em } from '../styles';
 import { listScreendividerStyle, detailsScreenScrollViewStyle } from '../styles/general';
@@ -40,7 +41,9 @@ class DetailsScreen extends PureComponent {
 
   onToggleFavoriteButton = () => this.setState(prevState => ({ isBookFavorite: !prevState.isBookFavorite }));
 
-  _showModal = () => this.setState({ isShowingModal: true });
+  onShowModal = () => this.setState({ isShowingModal: true });
+
+  onCloseModal = () => this.setState({ isShowingModal: false });
 
   render() {
     const {
@@ -50,7 +53,7 @@ class DetailsScreen extends PureComponent {
       }
     } = this.props;
 
-    const { rating, isBookFavorite } = this.state;
+    const { rating, isBookFavorite, isShowingModal } = this.state;
 
     return (
       <>
@@ -73,7 +76,7 @@ class DetailsScreen extends PureComponent {
 
           <BookDetails
             item={params}
-            onPressBuyButton={this._showModal}
+            onPressBuyButton={this.onShowModal}
             starRating={rating}
             onPressStarRating={this.onPressStarRating}
             isBookFavorite={isBookFavorite}
@@ -89,6 +92,10 @@ class DetailsScreen extends PureComponent {
             {params.volumeInfo.description}
           </Text>
         </ScrollViewContainer>
+
+        <Modal isVisible={isShowingModal} onBackdropPress={this.onCloseModal}>
+          <DetailsModalContent onPressCloseButton={this.onCloseModal} />
+        </Modal>
       </>
     );
   }
