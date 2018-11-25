@@ -2,9 +2,9 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { Types } from './books';
 import Api from '../api';
 
-export function* getBooks(query) {
+export function* asyncFetchBooks({ payload }) {
   try {
-    const response = yield call(Api.fetchBooks, query);
+    const response = yield call(Api.fetchBooks, payload);
 
     yield put({ type: Types.GET_BOOKS_SUCCESS, payload: response });
   } catch (err) {
@@ -13,7 +13,5 @@ export function* getBooks(query) {
 }
 
 export default function* root() {
-  yield [
-    takeLatest(Types.GET_BOOKS, getBooks)
-  ];
+  yield takeLatest(Types.GET_BOOKS, asyncFetchBooks);
 }

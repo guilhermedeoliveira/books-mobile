@@ -16,7 +16,7 @@ import SearchInput from '../components/SearchInput';
 import Header from '../components/Header';
 import Grid from '../components/Grid';
 
-import { getBooks } from '../store/books';
+import { fetchBooks } from '../store/books';
 
 import styles, { em } from '../styles';
 import { listScreendividerStyle } from '../styles/general';
@@ -30,7 +30,7 @@ class ListScreen extends PureComponent {
     navigation: shape({
       navigate: func.isRequired
     }).isRequired,
-    getBooks: func.isRequired,
+    fetchBooks: func.isRequired,
     loading: bool.isRequired,
     books: arrayOf(object).isRequired
   };
@@ -57,7 +57,7 @@ class ListScreen extends PureComponent {
 
   _showSearchInput = () => this.setState({ search: '', isShowingSearchInput: true });
 
-  _fetchBooks = () => this.props.getBooks(this.state.search); // eslint-disable-line react/destructuring-assignment
+  _fetchBooks = () => this.props.fetchBooks(this.state.search); // eslint-disable-line react/destructuring-assignment
 
   render() {
     const { loading, books } = this.props;
@@ -112,5 +112,5 @@ export default connect(
     books: store.books.data,
     error: store.books.error
   }),
-  dispatch => bindActionCreators({ getBooks }, dispatch)
+  dispatch => bindActionCreators({ fetchBooks }, dispatch)
 )(ListScreen);
