@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { TouchableOpacity } from 'react-native';
 import {
   shape,
   func,
@@ -11,17 +12,18 @@ import { bindActionCreators } from 'redux';
 import { Divider } from 'react-native-elements';
 
 import { ViewContainer, StyledMaterialIcon } from '../components/shared';
+import SearchInput from '../components/SearchInput';
 import Header from '../components/Header';
 import Grid from '../components/Grid';
 
 import { getBooks } from '../store/books';
 
-import styles, { em, isIOS } from '../styles';
+import styles, { em } from '../styles';
 import { listScreendividerStyle } from '../styles/general';
 
-class ListScreen extends Component {
+class ListScreen extends PureComponent {
   static navigationOptions = {
-    drawerLabel: 'List'
+    header: null
   };
 
   static propTypes = {
@@ -33,35 +35,62 @@ class ListScreen extends Component {
     books: arrayOf(object).isRequired
   };
 
-  async componentDidMount() {
-    await this.props.getBooks('a vida como');
-  }
+  state = { isShowingSearchInput: false };
 
   onNavigate = (route, params) => {
     const { navigation: { navigate } } = this.props;
     return navigate(route, params);
   };
 
+  onPressSearchButton = async () => {
+    await this._fetchBooks();
+    this.setState({ isShowingSearchInput: false });
+  };
+
+  onChangeInput = (value, name) => this.setState({ [name]: value })
+
+  _showSearchInput = () => this.setState({ search: '', isShowingSearchInput: true });
+
+  _fetchBooks = () => this.props.getBooks(this.state.search); // eslint-disable-line react/destructuring-assignment
+
   render() {
     const { loading, books } = this.props;
+    const { isShowingSearchInput, search } = this.state;
 
     return (
       <ViewContainer
-        paddingVertical={isIOS ? em(3.5) : em(1.5)}
+        paddingTop={em(1)}
         paddingHorizontal={em(0.3)}
         backgroundColor={styles.colors.mainColor}
       >
-        <Header
-          left={<StyledMaterialIcon name="menu" />}
-          title="Design Books"
-          right={<StyledMaterialIcon name="search" />}
-        />
+        {isShowingSearchInput
+          ? (
+            <SearchInput
+              name="search"
+              placeholder="Search book"
+              value={search}
+              onChangeText={this.onChangeInput}
+              onPressSearchButton={this.onPressSearchButton}
+            />
+          )
+          : (
+            <Header
+              left={<StyledMaterialIcon name="menu" />}
+              title="Design Books"
+              right={(
+                <TouchableOpacity onPress={this._showSearchInput}>
+                  <StyledMaterialIcon name="search" />
+                </TouchableOpacity>
+              )}
+            />
+          )}
 
         <Divider style={listScreendividerStyle} />
 
         <Grid
           isLoading={loading}
           data={books}
+          onRefresh={this._fetchBooks}
           grid={3}
           onPressGridItem={this.onNavigate}
         />

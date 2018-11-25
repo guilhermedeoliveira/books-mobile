@@ -25,6 +25,13 @@ export const detailsScreenScrollViewStyle = {
   paddingHorizontal: em(1.5)
 };
 
+export const searchInputContainerStyle = {
+  flexDirection: 'row',
+  alignItems: 'center',
+  width: styles.width,
+  paddingHorizontal: em(1)
+};
+
 export const borderedStyle = {
   borderWidth: styles.border.default,
   bordercolor: styles.colors.tint
