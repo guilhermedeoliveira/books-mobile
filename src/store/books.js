@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
       return {
         loading: false,
         data: [
-          ...state.data,
+          ...state.data.filter(i => i.id),
           ...action.payload
         ],
         error: ''
