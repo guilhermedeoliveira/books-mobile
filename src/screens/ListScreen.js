@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+
 import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
 import {
@@ -16,7 +18,7 @@ import SearchInput from '../components/SearchInput';
 import Header from '../components/Header';
 import Grid from '../components/Grid';
 
-import { fetchBooks } from '../store/books';
+import { fetchBooks, paginateBooks } from '../store/books';
 
 import styles, { em } from '../styles';
 import { listScreendividerStyle } from '../styles/general';
@@ -31,13 +33,15 @@ class ListScreen extends PureComponent {
       navigate: func.isRequired
     }).isRequired,
     fetchBooks: func.isRequired,
+    paginateBooks: func.isRequired,
     loading: bool.isRequired,
     books: arrayOf(object).isRequired
   };
 
   state = {
     isShowingSearchInput: false,
-    isFetchingWithButton: false
+    isFetchingWithButton: false,
+    startIndex: 10
   };
 
   onNavigate = (route, params) => {
@@ -47,17 +51,31 @@ class ListScreen extends PureComponent {
 
   onPressSearchButton = async () => {
     await this._fetchBooks();
+
     return this.setState({
       isShowingSearchInput: false,
       isFetchingWithButton: true
     });
   };
 
-  onChangeInput = (value, name) => this.setState({ [name]: value })
+  onChangeInput = (value, name) => this.setState({ [name]: value });
 
   _showSearchInput = () => this.setState({ search: '', isShowingSearchInput: true });
 
-  _fetchBooks = () => this.props.fetchBooks(this.state.search); // eslint-disable-line react/destructuring-assignment
+  _fetchBooks = () => {
+    this.props.fetchBooks(this.state.search);
+    this.setState({ startIndex: 10 });
+  };
+
+  _paginateBooks = () => {
+    const { paginateBooks } = this.props;
+    const { search, startIndex, isShowingSearchInput } = this.state;
+
+    if (startIndex < 40 && !isShowingSearchInput) {
+      paginateBooks(search, startIndex);
+      this.setState({ startIndex: startIndex + 10 });
+    }
+  };
 
   render() {
     const { loading, books } = this.props;
@@ -98,6 +116,7 @@ class ListScreen extends PureComponent {
           isFetchingWithButton={isFetchingWithButton}
           data={books}
           onRefresh={this._fetchBooks}
+          onEndReached={this._paginateBooks}
           grid={3}
           onPressGridItem={this.onNavigate}
         />
@@ -112,5 +131,5 @@ export default connect(
     books: store.books.data,
     error: store.books.error
   }),
-  dispatch => bindActionCreators({ fetchBooks }, dispatch)
+  dispatch => bindActionCreators({ fetchBooks, paginateBooks }, dispatch)
 )(ListScreen);

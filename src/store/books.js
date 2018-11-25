@@ -4,7 +4,11 @@
 export const Types = {
   GET_BOOKS: 'books/GET_BOOKS',
   GET_BOOKS_SUCCESS: 'books/GET_BOOKS_SUCCESS',
-  GET_BOOKS_FAILURE: 'books/GET_BOOKS_FAILURE'
+  GET_BOOKS_FAILURE: 'books/GET_BOOKS_FAILURE',
+
+  GET_PAGINATE_BOOKS: 'books/GET_PAGINATE_BOOKS',
+  GET_PAGINATE_BOOKS_SUCCESS: 'books/GET_PAGINATE_BOOKS_SUCCESS',
+  GET_PAGINATE_BOOKS_FAILURE: 'books/GET_PAGINATE_BOOKS_FAILURE'
 };
 
 /**
@@ -39,6 +43,28 @@ export default (state = initialState, action) => {
         loading: false,
         error: action.payload
       };
+
+    case Types.GET_PAGINATE_BOOKS:
+      return {
+        ...state,
+        loading: true,
+        error: ''
+      };
+    case Types.GET_PAGINATE_BOOKS_SUCCESS:
+      return {
+        loading: false,
+        data: [
+          ...state.data,
+          ...action.payload
+        ],
+        error: ''
+      };
+    case Types.GET_PAGINATE_BOOKS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
     default:
       return state;
   }
@@ -47,7 +73,12 @@ export default (state = initialState, action) => {
 /**
  * action creators
  */
-export const fetchBooks = book => ({
+export const fetchBooks = books => ({
   type: Types.GET_BOOKS,
-  payload: book
+  payload: books
+});
+
+export const paginateBooks = (books, startIndex) => ({
+  type: Types.GET_PAGINATE_BOOKS,
+  payload: { books, startIndex }
 });

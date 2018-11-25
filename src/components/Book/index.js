@@ -1,11 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import {
-  shape,
-  string,
-  func,
-  object
-} from 'prop-types';
+import { func, object } from 'prop-types';
 
 import { GridItemContainer, GridItemTouchableContainer } from './Book.styles';
 import Text from '../Text';
@@ -29,11 +24,9 @@ const Book = ({ item, onPressItem, containerStyle }) => {
 };
 
 Book.propTypes = {
-  item: shape({
-    smallThumbnail: string.isRequired
-  }).isRequired,
-  onPressItem: func,
-  containerStyle: object
+  item: object.isRequired,
+  containerStyle: object,
+  onPressItem: func
 };
 
 Book.defaultProps = {

@@ -23,6 +23,7 @@ class Grid extends PureComponent {
     isFetchingWithButton: bool.isRequired,
     data: arrayOf(object).isRequired,
     onRefresh: func.isRequired,
+    onEndReached: func.isRequired,
     grid: number.isRequired,
     onPressGridItem: func
   };
@@ -53,6 +54,7 @@ class Grid extends PureComponent {
       isFetchingWithButton,
       data,
       onRefresh,
+      onEndReached,
       grid
     } = this.props;
 
@@ -80,6 +82,8 @@ class Grid extends PureComponent {
         refreshing={isLoading}
         numColumns={grid}
         renderItem={this._renderItem}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.01}
       />
     );
   }
