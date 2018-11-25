@@ -11,10 +11,10 @@ import {
   StyledMaterialIcon,
   ScrollViewContainer
 } from '../components/shared';
-import Modal from '../components/Modal';
 import Header from '../components/Header';
 import BookDetails from '../modules/details/BookDetails';
 import Text from '../components/Text';
+import Modal from '../components/Modal';
 
 import styles, { em } from '../styles';
 import { listScreendividerStyle, detailsScreenScrollViewStyle } from '../styles/general';
@@ -30,9 +30,15 @@ class DetailsScreen extends PureComponent {
     }).isRequired
   };
 
-  state = { isShowingModal: false, rating: 3 };
+  state = {
+    isBookFavorite: false,
+    isShowingModal: false,
+    rating: 3
+  };
 
   onPressStarRating = rating => this.setState({ rating });
+
+  onToggleFavoriteButton = () => this.setState(prevState => ({ isBookFavorite: !prevState.isBookFavorite }));
 
   _showModal = () => this.setState({ isShowingModal: true });
 
@@ -44,7 +50,7 @@ class DetailsScreen extends PureComponent {
       }
     } = this.props;
 
-    const { rating } = this.state;
+    const { rating, isBookFavorite } = this.state;
 
     return (
       <>
@@ -70,6 +76,8 @@ class DetailsScreen extends PureComponent {
             onPressBuyButton={this._showModal}
             starRating={rating}
             onPressStarRating={this.onPressStarRating}
+            isBookFavorite={isBookFavorite}
+            onPressFavoriteButton={this.onToggleFavoriteButton}
           />
         </ViewContainer>
 

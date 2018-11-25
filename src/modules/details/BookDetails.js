@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  func,
   shape,
   string,
   arrayOf,
+  bool,
+  func,
   number
 } from 'prop-types';
 import StarRating from 'react-native-star-rating';
@@ -27,9 +28,11 @@ import { normalizeAuthorsArray } from '../../helpers/array';
 
 const BookDetails = ({
   item,
-  onPressBuyButton,
   starRating,
-  onPressStarRating
+  isBookFavorite,
+  onPressStarRating,
+  onPressBuyButton,
+  onPressFavoriteButton
 }) => {
   const {
     volumeInfo: {
@@ -89,6 +92,8 @@ const BookDetails = ({
 
             <TouchableCircle
               radius={em(1.2)}
+              onPress={onPressFavoriteButton}
+              backgroundColor={isBookFavorite ? styles.colors.redHeart : styles.colors.gray}
               style={{ marginLeft: em(0.5) }}
             >
               <StyledMaterialIcon
@@ -117,9 +122,11 @@ BookDetails.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
-  onPressBuyButton: func.isRequired,
   starRating: number.isRequired,
-  onPressStarRating: func.isRequired
+  isBookFavorite: bool.isRequired,
+  onPressStarRating: func.isRequired,
+  onPressBuyButton: func.isRequired,
+  onPressFavoriteButton: func.isRequired
 };
 
 export default BookDetails;
