@@ -83,7 +83,7 @@ class ListScreen extends PureComponent {
 
     return (
       <ViewContainer
-        paddingTop={em(1)}
+        paddingTop={isShowingSearchInput ? 0 : em(1)}
         paddingHorizontal={em(0.3)}
         backgroundColor={styles.colors.mainColor}
       >

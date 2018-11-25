@@ -4,7 +4,8 @@ export const listScreendividerStyle = {
   height: 2,
   width: em(8.5),
   alignSelf: 'center',
-  marginVertical: em(1.2),
+  marginTop: em(0.5),
+  marginBottom: em(0.8),
   backgroundColor: styles.colors.yellowBorder
 };
 
@@ -29,7 +30,8 @@ export const searchInputContainerStyle = {
   flexDirection: 'row',
   alignItems: 'center',
   width: styles.width,
-  paddingHorizontal: em(1)
+  paddingRight: em(2),
+  paddingLeft: em(0.55)
 };
 
 export const borderedStyle = {
