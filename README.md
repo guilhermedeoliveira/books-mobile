@@ -20,12 +20,15 @@ Welcome screen. Navigates user to `ListScreen`.
 
 #### List
 User views a list of books and can perform:
-2. `Pull to refresh` the list.
-3. `Pagination` by scrolling down and reaching the end of the list.
-4. `Search for books` by typing in a `TextInput` component.
-5. Select one of the items and navigate to the `DetailScreen`.
+1. `Pull to refresh` the list of books.
+2. `Pagination` by scrolling down and reaching the end of the list.
+3. `Search for books` by typing in a `TextInput` component.
+4. Select one of the books and navigate to `DetailScreen`.
 
 #### Detail
-User views more information about the selected book and can perform off-line actions(like, star rating and launch modal by pressing `buy` button).
+User views more information about the selected book and can perform off-line actions:
+1. `Like`.
+2. `Star rating`.
+3. `Buy` button that launches a modal.
 
 _Based on [challenge](https://github.com/FotonTech/Challenge-RN-ReduxSaga/blob/master/README.md)_
