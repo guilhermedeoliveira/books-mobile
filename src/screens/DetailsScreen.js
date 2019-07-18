@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
-import {
-  shape,
-  func
-} from 'prop-types';
+import { shape, func } from 'prop-types';
 import { Divider } from 'react-native-elements';
 
 import {
@@ -18,7 +15,10 @@ import Modal from '../components/Modal';
 import DetailsModalContent from '../components/Modal/DetailsModalContent';
 
 import styles, { em } from '../styles';
-import { listScreendividerStyle, detailsScreenScrollViewStyle } from '../styles/general';
+import {
+  listScreendividerStyle,
+  detailsScreenScrollViewStyle
+} from '../styles/general';
 
 class DetailsScreen extends PureComponent {
   static navigationOptions = {
@@ -39,7 +39,8 @@ class DetailsScreen extends PureComponent {
 
   onPressStarRating = rating => this.setState({ rating });
 
-  onToggleFavoriteButton = () => this.setState(prevState => ({ isBookFavorite: !prevState.isBookFavorite }));
+  onToggleFavoriteButton = () =>
+    this.setState(prevState => ({ isBookFavorite: !prevState.isBookFavorite }));
 
   onShowModal = () => this.setState({ isShowingModal: true });
 
@@ -58,16 +59,15 @@ class DetailsScreen extends PureComponent {
     return (
       <>
         <ViewContainer
-          flex={1}
           paddingTop={em(1)}
           backgroundColor={styles.colors.mainColor}
         >
           <Header
-            left={(
+            left={
               <TouchableOpacity onPress={() => goBack()}>
                 <StyledMaterialIcon name="keyboard-backspace" />
               </TouchableOpacity>
-            )}
+            }
             title="Design Books"
             right={<StyledMaterialIcon name="search" />}
           />

@@ -26,9 +26,10 @@ class HomeScreen extends PureComponent {
     this.setState({ username });
   }
 
-
   render() {
-    const { navigation: { navigate } } = this.props;
+    const {
+      navigation: { navigate }
+    } = this.props;
     const { username } = this.state;
 
     return (
@@ -36,12 +37,16 @@ class HomeScreen extends PureComponent {
         backgroundColor={styles.colors.mainColor}
         paddingTop={em(3)}
       >
-        <Text huge centered>Books Mobile</Text>
+        <Text huge centered>
+          Books Mobile
+        </Text>
 
         <ViewContainer centralized paddingBottom={em(3)}>
           <ViewContainer centralized flex={0.5}>
             <ViewContainer>
-              <Text huge centered>Welcome {username || 'User'}</Text>
+              <Text huge centered>
+                Welcome {username || 'User'}
+              </Text>
             </ViewContainer>
 
             <ViewContainer>

@@ -10,7 +10,7 @@ export const BookDetailsContainer = styled.View`
   flex: 3;
   flex-direction: row;
 
-  paddingHorizontal: ${em(0.6)};
+  padding-horizontal: ${em(0.6)};
 `;
 
 export const BookDetailsLeftSection = styled.View`
